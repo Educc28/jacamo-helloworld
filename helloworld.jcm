@@ -14,14 +14,53 @@
 
 mas helloworld {
 
-    agent bob: sample_agent.asl {
-      focus: w.c1 
+    agent francois : hello.asl {
+        beliefs: message("Bonjour")
+        join:  france
+        focus: france.gui
+    }
+    agent maria    : hello.asl {
+        beliefs: message("Bom dia")
+        focus: brazil.gui          // we can avoid the explicit join (as in francois) since the focus in JCM files implies a join
+    }
+    agent giacomo  : hello.asl {
+        beliefs: message("Buon giorno")
+        focus: italy.gui
+    }
+    agent alice    : hello.asl {
+        beliefs: message("Good morning")
+        focus: usa.gui
     }
 
-    workspace w {
-      artifact c1: example.Counter(3) 
-    }
+    // agent bob : hello2.asl {
+    //     beliefs: country(us)
+    //     focus: jacamo.gui
 
+    // }
+
+
+    // workspace w {
+    //   artifact c1: example.Counter(3) 
+    // }
+
+    workspace jacamo {
+        artifact gui: display.GUIConsole("common")
+    }
     
+    workspace france {
+        artifact gui: display.GUIConsole("France")
+    }
+
+    workspace italy {
+        artifact gui: display.GUIConsole("Italy")
+    }
+
+    workspace brazil {
+        artifact gui: display.GUIConsole("Brazil")
+    }
+
+    workspace usa {
+        artifact gui: display.GUIConsole("USA")
+    }
 
 }
